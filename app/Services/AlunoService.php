@@ -48,6 +48,16 @@ class AlunoService {
         }
     }
 
+    public function getAluno($id){
+        $aluno = $this->aluno->aluno($id);
+
+        if(count($aluno) > 0){
+            return response()->json($aluno, 200);
+        } else {
+            return response()->json("Aluno não encontrado!", 400);
+        }
+    }
+
     public function alunosPorSerie($id){
         $series = $this->aluno->getSeries($id);
 

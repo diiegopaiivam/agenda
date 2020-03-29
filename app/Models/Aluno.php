@@ -42,6 +42,10 @@ class Aluno extends Model{
         return DB::table('aluno')->where('responsavel_id',$id)->get();
     }
 
+    public function aluno($id){
+        return DB::table('aluno')->where('id',$id)->get();
+    }
+
     public function responsavel(){
         return $this->belongsTo(Responsavel::class, 'responsavel_id');
     }
