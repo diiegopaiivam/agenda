@@ -13,6 +13,8 @@
 
 //Rotas para alunos
 $router->get('/api/alunos/','AlunoController@index');
+$router->get('api/alunos/series/{id}','AlunoController@series');
+$router->get('api/alunos/responsaveis/{id}','AlunoController@responsaveis');
 $router->post('/api/alunos/cadastro','AlunoController@store');
 $router->put('/api/alunos/update/{id}', 'AlunoController@update');
 $router->delete('/api/alunos/delete/{id}', 'AlunoController@delete');

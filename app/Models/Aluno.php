@@ -34,6 +34,14 @@ class Aluno extends Model{
         return DB::table('aluno')->where('id', $id)->delete();
     }
 
+    public function getSeries($id){
+        return DB::table('aluno')->where('serie_id',$id)->get();
+    }
+
+    public function getResponsavel($id){
+        return DB::table('aluno')->where('responsavel_id',$id)->get();
+    }
+
     public function responsavel(){
         return $this->belongsTo(Responsavel::class, 'responsavel_id');
     }

@@ -19,6 +19,14 @@ class AlunoController extends Controller
         return $this->alunoService->listarAlunos();
     }
 
+    public function series($id){
+        return $this->alunoService->alunosPorSerie($id);
+    }
+
+    public function responsaveis($id){
+        return $this->alunoService->alunosPorResponsavel($id);
+    }
+
     public function store(Request $request){
         return $this->alunoService->cadastrarAluno($request);
     }
