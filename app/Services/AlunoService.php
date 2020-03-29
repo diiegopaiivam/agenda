@@ -2,17 +2,22 @@
 
 namespace App\Services;
 
+
 use App\Models\Aluno;
+use App\Models\Serie;
 use Illuminate\Support\Facades\Validator;
 use App\Validacoes\AlunoValidate;
 use Illuminate\Http\Request;
 
 class AlunoService {
 
-    private $aluno;
 
-    public function __construct(Aluno $aluno){
+    private $aluno;
+    private $serie;
+
+    public function __construct(Aluno $aluno, Serie $serie){
         $this->aluno = $aluno;
+        $this->serie = $serie;
     }
 
 
@@ -65,6 +70,17 @@ class AlunoService {
             return response()->json($series, 200);
         } else {
             return response()->json("Não há alunos cadastrados por serie", 202);
+        }
+    }
+
+    public function seriesComAlunos($id){
+        $series = $this->serie->getSeries($id);
+        $array = json_decode(json_encode($series), true);
+ 
+        if(count($array) > 0){
+            return response()->json($array ,200);
+        } else {
+            return response()->json("Não há alunos cadastrados nessa série", 404);
         }
     }
 

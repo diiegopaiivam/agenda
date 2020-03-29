@@ -23,3 +23,5 @@ $router->delete('/api/alunos/delete/{id}', 'AlunoController@delete');
 //Rotas para Responsáveis
 $router->get('/api/responsaveis/','ResponsavelController@index');
 $router->post('/api/responsaveis/cadastro','ResponsavelController@store');
+
+$router->get('/api/series/{id}', 'AlunoController@seriesAlunos');
