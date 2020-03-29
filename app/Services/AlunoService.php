@@ -65,9 +65,10 @@ class AlunoService {
 
     public function alunosPorSerie($id){
         $series = $this->aluno->getSeries($id);
-
-        if(count($series) > 0){
-            return response()->json($series, 200);
+        $array = json_decode(json_encode($series), true);
+        
+        if(count($array) > 0){
+            return response()->json($array, 200);
         } else {
             return response()->json("Não há alunos cadastrados por serie", 202);
         }
