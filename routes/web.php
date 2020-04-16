@@ -23,3 +23,15 @@ $router->delete('/api/alunos/delete/{id}', 'AlunoController@delete');
 $router->get('/api/responsaveis/','ResponsavelController@index');
 $router->post('/api/responsaveis/cadastro','ResponsavelController@store');
 
+$router->get('/envio', function() {
+    Mail::send('Email de teste', function($message){
+        try {
+            $message->from('diiegopaiivam@gmail.com', 'Diego Paiva');
+            $message->subject('Email de teste');
+            $message->to('diego.mja@hotmail.com');
+        } catch(Error $error){
+            echo $error;
+        }
+    });
+});
+

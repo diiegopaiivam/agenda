@@ -14,7 +14,7 @@ class AlunoController extends Controller
     public function index(Request $request){
         if(!$request->query()){
             $listagem = DB::table('aluno')->get();
-            echo "<pre>";print_r($request->query());die;
+            //echo "<pre>";print_r($request->query());die;
 
             if(count($listagem) > 0){
                 return response()->json($listagem, 200);
@@ -41,8 +41,8 @@ class AlunoController extends Controller
     }
 
     public function show($id){
-        $aluno = DB::table('aluno')->where('id',$id)->get();
-        if(count($aluno) > 0){
+        $aluno = Aluno::find($id);
+        if($aluno){
             return response()->json($aluno, 200);
         } else {
             return response()->json("Aluno não encontrado!", 400);
@@ -59,28 +59,28 @@ class AlunoController extends Controller
         if($validacao->fails()) {
             return response()->json($validacao->errors(), 400); 
         } else {
-            $aluno = new Aluno;
-            $store = $aluno->create($request->all()); //Salva o registro
-            if(!$store){
+            $aluno = Aluno::create($request->all()); //Salva o registro;
+            if(!$aluno){
                 return response()->json('Falha ao Cadastrar o Aluno');
             } else {
-                return response()->json($store, 201);
+                return response()->json($aluno, 201);
             }
         }    
     }
 
     public function update($id, Request $request){
-        $atualiza = DB::table('aluno')->where('id', $id)->update($request->except('_token', '_method'));
+        $aluno = Aluno::find($id);
+        $update = $aluno->update($request->all());
 
-        if(!$atualiza){
+        if(!$update){
             return response()->json('Falha ao atualizar o aluno', 400);
         } else {
-            return response()->json($atualiza, 200);
+            return response()->json($update, 200);
         }
     }
 
     public function delete($id){
-        $deletar = DB::table('aluno')->where('id', $id)->delete();
+        $deletar = Aluno::destroy($id);
 
         if($deletar){
             return response()->json('Aluno excluído!', 200);
