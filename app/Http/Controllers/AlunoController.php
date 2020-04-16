@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use App\Validacoes\AlunoValidate;
 use App\Models\Aluno;
+use App\Services\AlunoService;
 
 
 class AlunoController extends Controller
@@ -22,17 +23,23 @@ class AlunoController extends Controller
                 return response()->json("Não há alunos cadastrados!", 400);
             }
         } else {
-            $serie = $request->query('serie_id');
-            if($serie){
-                $listagem = DB::table('aluno')->get()->where('serie_id', $serie);
-                return response()->json($listagem, 200);
-            }
+            $array = $request->query();
+            $data = key($array);
+            $aluno = new AlunoService;
+            $parametro = $aluno->verificaParams($data);
+            $result = $request->query($parametro);
+            $listagem = $aluno->retornaQuery($parametro, $result);
+            //echo "<pre>";print_r($parametro);die;
+
+            // if($serie){
+            //     $listagem = DB::table('aluno')->get()->where('serie_id', $serie);
+            //     return response()->json($listagem, 200);
+            // }
             
-            $responsavel = $request->query('responsavel');
-            $id = DB::select('select id from responsavel where name = ?', [$responsavel]);
-            $chave = json_decode(json_encode($id));
-            $id = $chave[0]->id;
-            $listagem = DB::select('select aluno.*, responsavel.email, responsavel.phone1, responsavel.phone2 from aluno as aluno join responsavel on aluno.responsavel_id = responsavel.id where responsavel.id = ?', [$id]);
+            // $id = DB::select('select id from responsavel where name = ?', [$responsavel]);
+            // $chave = json_decode(json_encode($id));
+            // $id = $chave[0]->id;
+            // $listagem = DB::select('select aluno.*, responsavel.email, responsavel.phone1, responsavel.phone2 from aluno as aluno join responsavel on aluno.responsavel_id = responsavel.id where responsavel.id = ?', [$id]);
             
             
             return response()->json($listagem, 200);
