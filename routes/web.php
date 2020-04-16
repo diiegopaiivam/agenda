@@ -10,13 +10,12 @@
 | and give it the Closure to call when that URI is requested.
 |
 */
+$router->get('/', 'AlunoController@index');
 
 //Rotas para alunos
 $router->get('/api/alunos/','AlunoController@index');
-$router->get('/api/alunos/{id}','AlunoController@aluno');
-$router->get('api/alunos/series/{id}','AlunoController@series');
-$router->get('api/alunos/responsaveis/{id}','AlunoController@responsaveis');
-$router->post('/api/alunos/cadastro','AlunoController@store');
+$router->get('/api/alunos/{id}','AlunoController@show');
+$router->post('/api/alunos/store','AlunoController@store');
 $router->put('/api/alunos/update/{id}', 'AlunoController@update');
 $router->delete('/api/alunos/delete/{id}', 'AlunoController@delete');
 
@@ -24,4 +23,3 @@ $router->delete('/api/alunos/delete/{id}', 'AlunoController@delete');
 $router->get('/api/responsaveis/','ResponsavelController@index');
 $router->post('/api/responsaveis/cadastro','ResponsavelController@store');
 
-$router->get('/api/series/{id}', 'AlunoController@seriesAlunos');

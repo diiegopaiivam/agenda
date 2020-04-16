@@ -23,13 +23,6 @@ class ResponsavelController extends Controller
         return $this->responsavelService->cadastrarResponsavel($request);
     }
 
-    // public function update($id, Request $request){
-    //     return $this->alunoService->atualizarAluno($id, $request);
-    // }
-
-    // public function delete($id){
-    //     return $this->alunoService->deletarAluno($id);
-    // }
 
     
 }

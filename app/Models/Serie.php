@@ -6,13 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use App\Models\Aluno;
 
-
 class Serie extends Model{
 
-    /**
-     * @var String
-     */
-    protected $name;
 
     protected $table = 'serie';
  	

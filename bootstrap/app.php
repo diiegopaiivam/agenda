@@ -63,6 +63,11 @@ $app->alias('mailer', Illuminate\Contracts\Mail\MailQueue::class);
 |
 */
 
+$app->middleware([
+	//...,
+	'Vluzrmos\LumenCors\CorsMiddleware'
+]);
+
 // $app->middleware([
 //     App\Http\Middleware\ExampleMiddleware::class
 // ]);
