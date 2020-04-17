@@ -29,19 +29,9 @@ class AlunoController extends Controller
             $parametro = $aluno->verificaParams($data);
             $result = $request->query($parametro);
             $listagem = $aluno->retornaQuery($parametro, $result);
-            //echo "<pre>";print_r($parametro);die;
-
-            // if($serie){
-            //     $listagem = DB::table('aluno')->get()->where('serie_id', $serie);
-            //     return response()->json($listagem, 200);
-            // }
-            
-            // $id = DB::select('select id from responsavel where name = ?', [$responsavel]);
-            // $chave = json_decode(json_encode($id));
-            // $id = $chave[0]->id;
-            // $listagem = DB::select('select aluno.*, responsavel.email, responsavel.phone1, responsavel.phone2 from aluno as aluno join responsavel on aluno.responsavel_id = responsavel.id where responsavel.id = ?', [$id]);
-            
-            
+            if ($listagem === [''] || $listagem === []){
+                return response()->json("Não resultados para esse parâmetro", 400);
+            }
             return response()->json($listagem, 200);
 
         }

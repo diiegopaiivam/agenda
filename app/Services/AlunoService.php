@@ -31,6 +31,7 @@ class AlunoService {
         if ($parametro === 'serie_id'){
             $listagem = DB::table('aluno')->get()->where('serie_id', $result);
             return $listagem;
+            
         } else {
             $id = DB::select('select id from responsavel where name = ?', [$result]);
             $chave = json_decode(json_encode($id));
